@@ -6,69 +6,116 @@
     <title>CI/CD Demo App</title>
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #4facfe, #00f2fe);
-            color: #fff;
-            text-align: center;
-            padding: 50px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .container {
-            background: rgba(0, 0, 0, 0.2);
-            padding: 30px;
-            border-radius: 15px;
-            display: inline-block;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #1d2671, #c33764);
+            color: white;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            width: 350px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         h1 {
-            font-size: 2.5rem;
+            margin-bottom: 10px;
         }
 
-        .version {
+        p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .info {
             margin-top: 20px;
-            font-size: 1.2rem;
-            color: #ffd700;
+            padding: 15px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+        }
+
+        .info div {
+            margin: 8px 0;
         }
 
         button {
             margin-top: 20px;
-            padding: 10px 20px;
+            padding: 10px 18px;
             border: none;
             border-radius: 8px;
-            background-color: #ff7eb3;
-            color: white;
-            font-size: 1rem;
+            background: #00c6ff;
+            color: #000;
+            font-weight: bold;
             cursor: pointer;
+            transition: 0.3s;
         }
 
         button:hover {
-            background-color: #ff4e8a;
+            background: #00a2cc;
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            opacity: 0.7;
         }
     </style>
 </head>
 
 <body>
 
-    <div class="container">
-        <h1>🚀 CI/CD Demo Web App</h1>
-        <p>This app is deployed using GitHub CI/CD pipeline.</p>
+    <div class="card">
+        <h1>🚀 CI/CD Demo</h1>
+        <p>Auto-deployed using GitHub Actions</p>
 
-        <div class="version">
-            Version: <span id="version">1.0.0</span>
+        <div class="info">
+            <div><strong>Version:</strong> <span id="version">1.0.0</span></div>
+            <div><strong>Last Updated:</strong> <span id="time"></span></div>
+            <div><strong>Status:</strong> ✅ Live</div>
         </div>
 
-        <button onclick="updateVersion()">Simulate Update</button>
+        <button onclick="simulateDeploy()">Simulate New Deployment</button>
+
+        <footer>
+            Made for CI/CD Demonstration
+        </footer>
     </div>
 
     <script>
-        let versionNumber = 1.0;
-
-        function updateVersion() {
-            versionNumber += 0.1;
-            document.getElementById("version").innerText = versionNumber.toFixed(1);
+        // Set current time on load
+        function setTime() {
+            const now = new Date();
+            document.getElementById("time").innerText = now.toLocaleString();
         }
+
+        // Simulate deployment (version bump)
+        function simulateDeploy() {
+            let versionText = document.getElementById("version").innerText;
+            let parts = versionText.split(".");
+            
+            // Increase patch version
+            parts[2] = parseInt(parts[2]) + 1;
+            
+            document.getElementById("version").innerText = parts.join(".");
+            setTime();
+        }
+
+        // Initialize page
+        setTime();
     </script>
 
 </body>
