@@ -71,7 +71,12 @@
         footer {
             margin-top: 20px;
             font-size: 0.8rem;
-            opacity: 0.7;
+            opacity: 0.8;
+        }
+
+        footer strong {
+            display: block;
+            margin-top: 5px;
         }
     </style>
 </head>
@@ -92,6 +97,7 @@
 
         <footer>
             Made for CI/CD Demonstration
+            <strong>👩‍💻 Asmita Todkar</strong>
         </footer>
     </div>
 
@@ -107,7 +113,7 @@
             let versionText = document.getElementById("version").innerText;
             let parts = versionText.split(".");
             
-            // Increase patch version
+            // Increase patch version safely
             parts[2] = parseInt(parts[2]) + 1;
             
             document.getElementById("version").innerText = parts.join(".");
